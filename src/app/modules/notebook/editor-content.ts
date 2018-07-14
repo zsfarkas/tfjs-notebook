@@ -9,7 +9,8 @@ export class EditorContent {
     public consoleOutput: ConsoleOutput[] = [],
     public output?: any,
     public consoleExpanded = true,
-    public editorExpanded = true) { }
+    public editorExpanded = true,
+    public closed = false) { }
 }
 
 export enum ConsoleSeverity {

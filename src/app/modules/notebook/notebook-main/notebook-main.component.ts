@@ -24,7 +24,7 @@ import { saveAs } from 'file-saver';
   `,
   styles: [`
     .content-wrapper {
-      margin: 32px 32px 0 32px;
+      margin: 16px 32px 16px 32px;
     }
   `]
 })
@@ -74,7 +74,7 @@ export class NotebookMainComponent implements OnInit {
       }
 
       return value;
-    });
+    }, ' ');
     const blob = new Blob([data], {type: 'text/plain;charset=utf-8'});
 
     saveAs(blob, 'tfjs-notebook.json');

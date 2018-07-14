@@ -7,11 +7,13 @@ type LogFunction = (message?: any, ...params: any[]) => void;
   selector: 'tfn-editor',
   template: `
     <mat-expansion-panel
+        *ngIf="isCodeEditor() || !isClosed()"
         [expanded]="editorContent.editorExpanded"
         (opened)="editorContent.editorExpanded = true"
         (closed)="editorContent.editorExpanded = false">
       <mat-expansion-panel-header>
         <button mat-icon-button  *ngIf="isCodeEditor()" (click)="runCode($event)"><mat-icon>play_arrow</mat-icon></button>
+        <button mat-icon-button  *ngIf="!isCodeEditor()" (click)="closeComment()"><mat-icon>close</mat-icon></button>
         <tfn-toolbar-divider *ngIf="isCodeEditor()"></tfn-toolbar-divider>
         <button mat-icon-button (click)="emitAddCodeEvent($event)"><mat-icon>add</mat-icon></button>
         <button mat-icon-button (click)="emitAddCommentEvent($event)"><mat-icon>add_comment</mat-icon></button>
@@ -24,6 +26,12 @@ type LogFunction = (message?: any, ...params: any[]) => void;
          [placeholder]="getPlaceholder()">{{editorContent.content}}</textarea>
       </mat-form-field>
     </mat-expansion-panel>
+    <div *ngIf="!isCodeEditor() && isClosed()">
+      <p>
+        <button mat-icon-button (click)="openComment()"><mat-icon>comment</mat-icon></button>
+        <span>{{ editorContent.content }}</span>
+      </p>
+    </div>
     <mat-expansion-panel class="console"
         [expanded]="editorContent.consoleExpanded"
         (opened)="editorContent.consoleExpanded=true"
@@ -80,6 +88,18 @@ export class EditorComponent implements OnInit {
 
   isCodeEditor() {
      return this.editorContent.type === EditorType.CODE;
+  }
+
+  isClosed() {
+    return this.editorContent.closed;
+  }
+
+  closeComment() {
+    this.editorContent.closed = true;
+  }
+
+  openComment() {
+    this.editorContent.closed = false;
   }
 
   getPlaceholder() {

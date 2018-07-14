@@ -1,5 +1,5 @@
 {
-  "name": "tf-notebook",
+  "name": "tfjs-notebook",
   "version": "0.1.0",
   "scripts": {
     "ng": "ng",

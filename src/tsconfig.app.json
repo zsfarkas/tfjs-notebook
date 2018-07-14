@@ -3,7 +3,7 @@
   "compilerOptions": {
     "outDir": "../out-tsc/app",
     "module": "es2015",
-    "types": []
+    "types": ["file-saver"]
   },
   "exclude": [
     "src/test.ts",

@@ -3,10 +3,16 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'tfn-root',
   template: `
-    Hello World.
+    <mat-toolbar color="primary" class="title">
+      <span>Tensorflow JS Notebook</span>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
   `,
-  styles: []
+  styles: [`
+    .title {
+      justify-content: center;
+    }
+  `]
 })
 export class AppComponent {
-  title = 'tfn';
 }

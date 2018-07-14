@@ -1,0 +1,32 @@
+
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "ngserve",
+            "type":"shell",
+            "args": [
+                "serve"
+            ],
+            "command": "ng",
+            "isBackground": true,
+            "problemMatcher": [
+                {
+                  "pattern": [
+                    {
+                      "regexp": "\\b\\B",
+                      "file": 1,
+                      "location": 2,
+                      "message": 3
+                    }
+                  ],
+                  "background": {
+                    "activeOnStart": false,
+                    "beginsPattern": "^.*NG Live Development Server*",
+                    "endsPattern": "^.*webpack: Compiled successfully.*"
+                  }
+                }
+              ]
+        }
+    ]
+}

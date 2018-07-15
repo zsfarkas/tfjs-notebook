@@ -6,7 +6,7 @@ type LogFunction = (message?: any, ...params: any[]) => void;
 @Component({
   selector: 'tfn-editor',
   template: `
-    <mat-expansion-panel
+  <mat-expansion-panel
         *ngIf="isCodeEditor() || !isClosed()"
         [expanded]="editorContent.editorExpanded"
         (opened)="editorContent.editorExpanded = true"
@@ -20,10 +20,11 @@ type LogFunction = (message?: any, ...params: any[]) => void;
         <tfn-toolbar-divider></tfn-toolbar-divider>
         <button mat-icon-button (click)="emitDeleteEvent($event)"><mat-icon>delete</mat-icon></button>
       </mat-expansion-panel-header>
-      <mat-form-field class="concrete-editor" [class.code]="isCodeEditor()">
-        <textarea matInput matTextareaAutosize
+      <mat-form-field class="concrete-editor">
+        <mat-codemirror
           [(ngModel)]="editorContent.content"
-         [placeholder]="getPlaceholder()">{{editorContent.content}}</textarea>
+          [options]="{ theme: 'neat', mode: 'javascript' }"
+          [placeholder]="getPlaceholder()"></mat-codemirror>
       </mat-form-field>
     </mat-expansion-panel>
     <div *ngIf="!isCodeEditor() && isClosed()">
@@ -46,10 +47,6 @@ type LogFunction = (message?: any, ...params: any[]) => void;
   styles: [`
     .concrete-editor {
       width: 100%;
-    }
-
-    .code {
-      font-family: monospace;
     }
 
     .console {

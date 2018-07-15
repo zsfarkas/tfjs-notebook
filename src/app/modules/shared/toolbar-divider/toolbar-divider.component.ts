@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
     <mat-divider [vertical]="true" class="toolbar-divider"></mat-divider>
   `,
   styles: [`
-    .toolbar-divider {
+    .toolbar-dividerXXX {
       margin: 0 8px;
     }
   `]

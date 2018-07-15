@@ -1,0 +1,8 @@
+applications:
+- name: tfjs-notebook
+  instances: 1
+  memory: 16M
+  disk_quota: 32M
+  routes:
+  - route: tfjs-notebook.cfapps.io
+  stack: cflinuxfs2

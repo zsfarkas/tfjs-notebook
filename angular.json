@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "tf-notebook": {
+    "tfjs-notebook": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -20,7 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/tf-notebook",
+            "outputPath": "dist/tfjs-notebook",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -33,9 +33,14 @@
               {
                 "input": "node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
               },
+              "node_modules/codemirror/lib/codemirror.css",
+              "node_modules/codemirror/theme/neat.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/codemirror/lib/codemirror.js",
+              "node_modules/codemirror/mode/javascript/javascript.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -60,18 +65,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "tf-notebook:build"
+            "browserTarget": "tfjs-notebook:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "tf-notebook:build:production"
+              "browserTarget": "tfjs-notebook:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "tf-notebook:build"
+            "browserTarget": "tfjs-notebook:build"
           }
         },
         "test": {
@@ -116,11 +121,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "tf-notebook:serve"
+            "devServerTarget": "tfjs-notebook:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "tf-notebook:serve:production"
+              "devServerTarget": "tfjs-notebook:serve:production"
             }
           }
         },
@@ -136,5 +141,5 @@
       }
     }
   },
-  "defaultProject": "tf-notebook"
+  "defaultProject": "tfjs-notebook"
 }

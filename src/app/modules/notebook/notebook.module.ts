@@ -8,6 +8,7 @@ import { EditorComponent } from './notebook-main/editor/editor.component';
 import { SharedModule } from '../shared/shared.module';
 import { FormsModule } from '../../../../node_modules/@angular/forms';
 import { FileLoaderComponent } from './notebook-main/file-loader/file-loader.component';
+import { MatCodemirrorModule } from 'ngx-mat-codemirror';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { FileLoaderComponent } from './notebook-main/file-loader/file-loader.com
     MatExpansionModule,
     MatDividerModule,
     SharedModule,
-    FormsModule
+    FormsModule,
+    MatCodemirrorModule
   ],
   declarations: [
     NotebookMainComponent,

@@ -1,0 +1,15 @@
+language: node_js
+node_js:
+- '10'
+script:
+  - npm run test
+  - npm run build
+deploy:
+  - provider: cloudfoundry
+    edge: true
+    username: pivotal@farkas.land
+    password:
+      secure: BTh/c3GVdaOAOllTukL1Ov92NSI+84b99J/hW/C8WXCmaE6iK2uVdH2mdqjUHL//BSckNf0BFfxmKxqcCPsd48yELFd6SDnbPC19TvdmMwJYNMzIQPyQyei5hW7rz5nK8UUy7OXEcZdr3L3dzcijp1DmlinnPidSzUfysYqB0OazZSjRTGSA+c244mMz6XOxGJEmeD3oqgOTegtH/NIVFvqQNuz+i6m92lN/Eh3VVO6NkMKfk6um4ftSMzRi3RC94cA3+335WvnssacwGJzw8HmVoYkjjajpcgZTug919ni86JcsOB8qPnEn1xrnQzseaq1sLY0uMh00mmUmDegkSd3slDflO79Jd1JWQZ80PnCz6LDk4FXt1aqCQAGKvOORL0ccZW3BYEmas45SBp1vV6rECPEgVdeaYa8JlKcHGDngoShkHiEyPV1BfQclOrb96N44KqwD/twB3cq5gCUdLPqdW7juwTVSxM/6mUEr5CWn7WPpvloh4N+jpPf4FAfz8GBqEtKEFd+K81hfHflNKDLFQtlynEUWk9yYT1HslQWge5yneABZjF45h7h1Dlqbuv94MF43yrrGDZYmCxth3vWrug0rpU/Y/5VKfcBDQF5VcqLLi0+b5tIBI17Q2sWaKZUJRdj5AyE/Ox4ypb9Qna370oHrTAffi35lB1pIIR4=
+    api: https://api.run.pivotal.io
+    organization: farkas-land
+    space: development

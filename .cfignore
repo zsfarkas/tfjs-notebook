@@ -1,0 +1,16 @@
+.vscode
+dist
+node_modules
+e2e
+src
+.*.*
+/*.js
+deploy.sh
+angular.json
+Dockerfile
+nginx.conf
+package*.json
+tslint.json
+tsconfig.json
+README.md
+npm-package/

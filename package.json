@@ -27,6 +27,7 @@
     "@angular/material": "^6.2.1",
     "@angular/platform-browser": "^6.0.3",
     "@angular/platform-browser-dynamic": "^6.0.3",
+    "@angular/pwa": "^0.6.8",
     "@angular/router": "^6.0.3",
     "codemirror": "^5.39.0",
     "core-js": "^2.5.4",
@@ -34,7 +35,8 @@
     "ngx-mat-codemirror": "^1.0.3",
     "rxjs": "^6.0.0",
     "rxjs-compat": "^6.2.2",
-    "zone.js": "^0.8.26"
+    "zone.js": "^0.8.26",
+    "@angular/service-worker": "^6.0.3"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.6.8",

@@ -12,7 +12,7 @@ type LogFunction = (message?: any, ...params: any[]) => void;
         (opened)="editorContent.editorExpanded = true"
         (closed)="editorContent.editorExpanded = false">
       <mat-expansion-panel-header>
-        <button mat-icon-button  *ngIf="isCodeEditor()" (click)="runCode($event)"><mat-icon>play_arrow</mat-icon></button>
+        <button mat-icon-button  *ngIf="isCodeEditor()" color="primary" (click)="runCode($event)"><mat-icon>play_arrow</mat-icon></button>
         <button mat-icon-button  *ngIf="!isCodeEditor()" (click)="closeComment()"><mat-icon>close</mat-icon></button>
         <tfn-toolbar-divider></tfn-toolbar-divider>
         <button mat-icon-button (click)="emitAddCodeEvent($event)"><mat-icon>add</mat-icon></button>

@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'tfn-root',
   template: `
     <mat-toolbar color="accent" class="title">
-      <span>Tensorflow.js Notebook</span>
+      <img class="logo" src="assets/icons/icon-72x72.png"> <span>Tensorflow.js Notebook</span>
     </mat-toolbar>
     <router-outlet></router-outlet>
   `,
@@ -12,6 +12,11 @@ import { Component } from '@angular/core';
     .title {
       /* justify-content: center; */
       color: white;
+    }
+
+    .logo {
+      margin: 8px;
+      width: 32px;
     }
   `]
 })

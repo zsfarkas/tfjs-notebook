@@ -14,7 +14,7 @@ type LogFunction = (message?: any, ...params: any[]) => void;
       <mat-expansion-panel-header>
         <button mat-icon-button  *ngIf="isCodeEditor()" (click)="runCode($event)"><mat-icon>play_arrow</mat-icon></button>
         <button mat-icon-button  *ngIf="!isCodeEditor()" (click)="closeComment()"><mat-icon>close</mat-icon></button>
-        <tfn-toolbar-divider *ngIf="isCodeEditor()"></tfn-toolbar-divider>
+        <tfn-toolbar-divider></tfn-toolbar-divider>
         <button mat-icon-button (click)="emitAddCodeEvent($event)"><mat-icon>add</mat-icon></button>
         <button mat-icon-button (click)="emitAddCommentEvent($event)"><mat-icon>add_comment</mat-icon></button>
         <tfn-toolbar-divider></tfn-toolbar-divider>
@@ -101,9 +101,9 @@ export class EditorComponent implements OnInit {
 
   getPlaceholder() {
     if (this.isCodeEditor()) {
-      return 'Your code';
+      return 'Javascript';
     } else {
-      return 'Your comment';
+      return 'Comment';
     }
   }
 

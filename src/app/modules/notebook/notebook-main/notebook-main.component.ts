@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
-import { EditorContent, EditorType, ConsoleSeverity } from '../editor-content';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { EditorContent, EditorType} from '../editor-content';
 import { saveAs } from 'file-saver';
 
 @Component({
@@ -10,7 +10,8 @@ import { saveAs } from 'file-saver';
       (commentAdded)="commentAddedFromToolbar()"
       (kernelRestarted)="kernelRestarted()"
       (downloadRequested)="download()"
-      (openRequested)="loadFile($event)">
+      (openRequested)="loadFile($event)"
+      (contentDeleted)="deleteAll()">
     </tfn-toolbar>
     <div class="content-wrapper" *ngFor="let content of contents">
       <tfn-editor
@@ -18,7 +19,10 @@ import { saveAs } from 'file-saver';
         [currentEditorContents]="contents"
         (deleted)="contentDeleted($event)"
         (codeAdded)="codeAddedAfter($event)"
-        (commentAdded)="commentAddedAfter($event)">
+        (commentAdded)="commentAddedAfter($event)"
+        (codeExecuted)="updateLocalStorage()"
+        (contentChanged)="updateLocalStorage()"
+      >
       </tfn-editor>
     </div>
   `,
@@ -35,28 +39,35 @@ export class NotebookMainComponent implements OnInit {
   constructor(private changeDetector: ChangeDetectorRef) { }
 
   ngOnInit() {
+    this.restoreContentsFromLocalStorage();
   }
 
   codeAddedFromToolbar() {
     this.contents.unshift(new EditorContent(EditorType.CODE));
+    this.updateLocalStorage();
   }
 
   commentAddedFromToolbar() {
     this.contents.unshift(new EditorContent(EditorType.COMMENT));
+    this.updateLocalStorage();
   }
 
   codeAddedAfter(content: EditorContent) {
     this.insertContentAfter(EditorType.CODE, content);
+    this.updateLocalStorage();
   }
 
   commentAddedAfter(content: EditorContent) {
     this.insertContentAfter(EditorType.COMMENT, content);
+    this.updateLocalStorage();
   }
 
   contentDeleted(content: EditorContent) {
     if (this.contents.indexOf(content) > -1) {
       this.contents.splice(this.contents.indexOf(content), 1);
     }
+
+    this.updateLocalStorage();
   }
 
   kernelRestarted() {
@@ -64,6 +75,7 @@ export class NotebookMainComponent implements OnInit {
       content.consoleOutput = [];
       content.output = null;
     });
+    this.updateLocalStorage();
   }
 
   download() {
@@ -78,14 +90,33 @@ export class NotebookMainComponent implements OnInit {
     const blob = new Blob([data], {type: 'text/plain;charset=utf-8'});
 
     saveAs(blob, 'tfjs-notebook.json');
+    this.updateLocalStorage();
   }
 
   loadFile(content: string) {
     this.contents =  JSON.parse(content);
+    this.updateLocalStorage();
   }
 
   private insertContentAfter(newContentType: EditorType, afterContent: EditorContent) {
     const contentIndex = this.contents.indexOf(afterContent);
     this.contents.splice(contentIndex + 1, 0, new EditorContent(newContentType));
+  }
+
+  updateLocalStorage() {
+    localStorage.setItem('contents', JSON.stringify(this.contents));
+  }
+
+  private restoreContentsFromLocalStorage() {
+    const contentsString = localStorage.getItem('contents');
+
+    if (contentsString) {
+      this.contents = JSON.parse(contentsString);
+    }
+  }
+
+  deleteAll() {
+    this.contents = [new EditorContent(EditorType.CODE)];
+    this.updateLocalStorage();
   }
 }

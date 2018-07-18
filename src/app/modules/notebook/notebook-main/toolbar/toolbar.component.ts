@@ -9,8 +9,10 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
       <tfn-toolbar-divider></tfn-toolbar-divider>
       <button mat-icon-button (click)='kernelRestarted.emit()'><mat-icon>autorenew</mat-icon></button>
       <tfn-toolbar-divider></tfn-toolbar-divider>
+      <button mat-icon-button (click)='contentDeleted.emit()'><mat-icon>delete</mat-icon></button>
+      <tfn-toolbar-divider></tfn-toolbar-divider>
       <tfn-file-loader (fileLoaded)="openRequested.emit($event)"></tfn-file-loader>
-      <button mat-icon-button (click)='downloadRequested.emit()'><mat-icon>save_alt</mat-icon></button>
+      <button mat-icon-button (click)='downloadRequested.emit()'><mat-icon>archive</mat-icon></button>
       <tfn-toolbar-divider></tfn-toolbar-divider>
       <button mat-icon-button (click)='openApiDocu()'><mat-icon>help</mat-icon></button>
     </mat-toolbar>
@@ -28,6 +30,8 @@ export class ToolbarComponent implements OnInit {
   @Output() openRequested = new EventEmitter<string>();
 
   @Output() downloadRequested = new EventEmitter();
+
+  @Output() contentDeleted = new EventEmitter();
 
   constructor() {}
 

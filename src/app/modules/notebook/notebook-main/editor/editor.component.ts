@@ -3,6 +3,8 @@ import { EditorType, EditorContent, ConsoleSeverity, ConsoleOutput } from '../..
 
 type LogFunction = (message?: any, ...params: any[]) => void;
 
+
+// TODO: this component is too complex; it should be refactored
 @Component({
   selector: 'tfn-editor',
   template: `
@@ -21,10 +23,18 @@ type LogFunction = (message?: any, ...params: any[]) => void;
         <button mat-icon-button (click)="emitDeleteEvent($event)"><mat-icon>delete</mat-icon></button>
       </mat-expansion-panel-header>
       <mat-form-field class="concrete-editor">
+        <textarea
+          *ngIf="!isCodeEditor()"
+          matTextareaAutosize matInput
+          [placeholder]="getPlaceholder()"
+          [(ngModel)]="editorContent.content"
+          (change)="emitContentChanged()"></textarea>
         <mat-codemirror
+          *ngIf="isCodeEditor()"
           [(ngModel)]="editorContent.content"
           [options]="{ theme: 'neat', mode: 'javascript' }"
-          [placeholder]="getPlaceholder()"></mat-codemirror>
+          [placeholder]="getPlaceholder()"
+          (change)="emitContentChanged()"></mat-codemirror>
       </mat-form-field>
     </mat-expansion-panel>
     <div *ngIf="!isCodeEditor() && isClosed()">
@@ -78,6 +88,10 @@ export class EditorComponent implements OnInit {
 
   @Output() codeAdded = new EventEmitter<EditorContent>();
 
+  @Output() codeExecuted = new EventEmitter<EditorContent>();
+
+  @Output() contentChanged = new EventEmitter<EditorContent>();
+
   constructor() { }
 
   ngOnInit() {
@@ -93,10 +107,15 @@ export class EditorComponent implements OnInit {
 
   closeComment() {
     this.editorContent.closed = true;
+    this.contentChanged.emit(this.editorContent);
   }
 
   openComment() {
     this.editorContent.closed = false;
+  }
+
+  emitContentChanged() {
+    this.contentChanged.emit(this.editorContent);
   }
 
   getPlaceholder() {
@@ -145,10 +164,12 @@ export class EditorComponent implements OnInit {
         this.editorContent.output = result;
         this.log(ConsoleSeverity.LOG, this.editorContent.output);
         this.restoreConsoleLogs(originalFunctions);
+        this.codeExecuted.emit(this.editorContent);
       });
     } else {
       this.log(ConsoleSeverity.LOG, this.editorContent.output);
       this.restoreConsoleLogs(originalFunctions);
+      this.codeExecuted.emit(this.editorContent);
     }
   }
 

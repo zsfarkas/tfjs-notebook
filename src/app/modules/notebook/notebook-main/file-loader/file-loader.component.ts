@@ -6,7 +6,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
       <input type="file" accept="application/json" hidden="true" id="file-loader"
       (change)="loadFile($event)">
       <label mat-icon-button for="file-loader" class="mat-icon-button"><span class="mat-button-wrapper">
-      <mat-icon>open_in_browser</mat-icon></span>
+      <mat-icon>unarchive</mat-icon></span>
       </label>
   `,
   styles: []

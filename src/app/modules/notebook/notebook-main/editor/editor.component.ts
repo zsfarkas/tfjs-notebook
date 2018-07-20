@@ -14,13 +14,16 @@ type LogFunction = (message?: any, ...params: any[]) => void;
         (opened)="editorContent.editorExpanded = true"
         (closed)="editorContent.editorExpanded = false">
       <mat-expansion-panel-header>
-        <button mat-icon-button  *ngIf="isCodeEditor()" color="primary" (click)="runCode($event)"><mat-icon>play_arrow</mat-icon></button>
-        <button mat-icon-button  *ngIf="!isCodeEditor()" (click)="closeComment()"><mat-icon>close</mat-icon></button>
+        <button mat-icon-button  *ngIf="isCodeEditor()" color="primary" (click)="runCode($event)" matTooltip="Run the code cell">
+          <mat-icon>play_arrow</mat-icon></button>
+        <button mat-icon-button  *ngIf="!isCodeEditor()" (click)="closeComment()" matTooltip="Reduce the size of the comment cell">
+          <mat-icon>close</mat-icon></button>
         <tfn-toolbar-divider></tfn-toolbar-divider>
-        <button mat-icon-button (click)="emitAddCodeEvent($event)"><mat-icon>add</mat-icon></button>
-        <button mat-icon-button (click)="emitAddCommentEvent($event)"><mat-icon>add_comment</mat-icon></button>
+        <button mat-icon-button (click)="emitAddCodeEvent($event)" matTooltip="Add a new code cell below"><mat-icon>add</mat-icon></button>
+        <button mat-icon-button (click)="emitAddCommentEvent($event)" matTooltip="Add a new comment cell below">
+          <mat-icon>add_comment</mat-icon></button>
         <tfn-toolbar-divider></tfn-toolbar-divider>
-        <button mat-icon-button (click)="emitDeleteEvent($event)"><mat-icon>delete</mat-icon></button>
+        <button mat-icon-button (click)="emitDeleteEvent($event)" matTooltip="Delete this cell"><mat-icon>delete</mat-icon></button>
       </mat-expansion-panel-header>
       <mat-form-field class="concrete-editor">
         <textarea
@@ -39,7 +42,7 @@ type LogFunction = (message?: any, ...params: any[]) => void;
     </mat-expansion-panel>
     <div *ngIf="!isCodeEditor() && isClosed()">
       <p>
-        <button mat-icon-button (click)="openComment()"><mat-icon>comment</mat-icon></button>
+        <button mat-icon-button (click)="openComment()" matTooltip="Open the comment editor"><mat-icon>comment</mat-icon></button>
         <span>{{ editorContent.content }}</span>
       </p>
     </div>

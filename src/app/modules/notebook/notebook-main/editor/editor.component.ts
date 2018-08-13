@@ -52,9 +52,12 @@ type LogFunction = (message?: any, ...params: any[]) => void;
         (closed)="editorContent.consoleExpanded=false"
         *ngIf="editorContent.consoleOutput.length > 0">
       <mat-expansion-panel-header>Output:</mat-expansion-panel-header>
-      <pre class="console-content"><span *ngFor="let consoleOutput of editorContent.consoleOutput"
-        [class.error]="isError(consoleOutput)"
-        [class.warn]="isWarn(consoleOutput)">{{ consoleOutput.content }}</span></pre>
+      <div class="console-content-wrapper">
+        <pre class="console-content"><span *ngFor="let consoleOutput of editorContent.consoleOutput"
+          [class.error]="isError(consoleOutput)"
+          [class.warn]="isWarn(consoleOutput)">{{ consoleOutput.content }}</span>
+        </pre>
+      </div>
     </mat-expansion-panel>
   `,
   styles: [`
@@ -68,6 +71,10 @@ type LogFunction = (message?: any, ...params: any[]) => void;
 
     .console-content {
       margin: 0;
+    }
+
+    .console-content-wrapper {
+      overflow-x: auto;
     }
 
     .error {
